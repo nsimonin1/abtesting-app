@@ -1,0 +1,22 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, 'new')}">
+<body>
+<div class="row">
+    <div class="col-6">
+        <form th:object="${car}" method="post" th:action="@{/cars/new}">
+            <div class="form-group">
+                <label for="nameCar">Name</label>
+                <input th:field="*{name}" type="text" class="form-control" id="nameCar" aria-describedby="nameCarHelp">
+            </div>
+            <div class="form-group">
+                <label for="serialNumberCar">Serial Number</label>
+                <input th:field="*{serialNumber}" type="text" class="form-control" id="serialNumberCar">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

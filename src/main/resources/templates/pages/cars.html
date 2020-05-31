@@ -1,0 +1,25 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, 'list')}">
+<body>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th> 
+        <th scope="col">CODE</th>
+        <th scope="col">NAME</th>
+        <th scope="col">SERIAL NUMBER</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car, inter :${cars}">
+        <th scope="row" th:text="${inter.index+1}">1</th>
+        <td th:text="${car.code}">Mark</td>
+        <td th:text="${car.name}">Otto</td>
+        <td th:text="${car.serialNumber}">@mdo</td>
+        <td><a th:href="@{cars/edit(code=${car.code})}">edit</a></td>
+    </tr>
+    </tbody>
+</table> 
+</body>
+</html>
