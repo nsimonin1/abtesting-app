@@ -1,18 +1,18 @@
 spring:
   profiles:
-    active: dev
+    active: mysql
   liquibase:
     change-log: classpath:db/master.xml
     drop-first: ${LIQUIBASE_DROP_FIRST:false}
     enabled: true
   h2:
     console:
-      enabled: true
+      enabled: false
   datasource:
-    platform: h2
-    url: jdbc:h2:~/CAR_DB
-    username: sa
-    password:
+    platform: mysql
+    url: jdbc:mysql://localhost/frontapp?serverTimezone=Africa/Douala&useUnicode=true&characterEncoding=utf8
+    username: frontapp
+    password: frontapp2020
   jpa:
     open-in-view: false
     show-sql: true

@@ -1,2 +1,7 @@
-# abtesting-app
-this project shows how use both react app and servlet web app
+# ABTesting App
+
+
+Your current application uses SpringMVC + Thymeleaf technologies and you want to migrate your frontend to Single page application technology like Reactjs. 
+
+
+

@@ -7,7 +7,9 @@ import org.ff4j.audit.repository.JdbcEventRepository;
 import org.ff4j.cache.FF4JCacheManager;
 import org.ff4j.cache.InMemoryCacheManager;
 import org.ff4j.conf.XmlConfig;
+import org.ff4j.core.FeatureStore;
 import org.ff4j.property.store.JdbcPropertyStore;
+import org.ff4j.property.store.PropertyStore;
 import org.ff4j.store.JdbcFeatureStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,8 +67,14 @@ public class FF4JConfiguration {
 
     private void loadInitFeatures(FF4j ff4j) {
         XmlConfig xmlConfig = ff4j.parseXmlConfig("db/init-ff4j.xml");
-        ff4j.getFeatureStore().importFeatures(xmlConfig.getFeatures().values());
-        ff4j.getPropertiesStore().importProperties(xmlConfig.getProperties().values());
+        FeatureStore store = ff4j.getFeatureStore();
+        PropertyStore propertyStore = ff4j.getPropertiesStore();
+        xmlConfig.getFeatures().values().stream()
+                .filter(feature -> !store.exist(feature.getUid()))
+                .forEach(store::create);
+        xmlConfig.getProperties().values().stream()
+                .filter(property -> !propertyStore.existProperty(property.getName()))
+                .forEach(propertyStore::createProperty);
     }
 
 }
