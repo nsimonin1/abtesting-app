@@ -3,11 +3,10 @@ import ListCarsComponent from "./ListCarsComponent";
 import PagesTools from "../tools/PagesTools";
 import CarNewComponent from "./CarNewComponent";
 import CarComponent from "./CarComponent";
+import { connect } from "react-redux";
 
 class NavigationComponent extends Component {
  
-
-
     render() {
         if(PagesTools.isPages('carsList')) {
             return (
