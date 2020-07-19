@@ -1,14 +1,11 @@
 <html xmlns:th="https://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout (~{::body}, 'list')}">
 <body>
-<script th:inline="javascript">
-		let data = /*[[${data}]]*/;
-        window.bdata = data;
- </script>
-<div id="container"></div>
-
-
-
-<script th:src="@{/main.js}"></script>
+    <script th:inline="javascript">
+            const data = /*[[${data}]]*/;
+            window.bdata = data;
+    </script>
+    <div id="container"></div>
+    <script th:src="@{/main.js}"></script>
 </body>
 </html>

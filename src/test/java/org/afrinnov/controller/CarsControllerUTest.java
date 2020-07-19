@@ -4,6 +4,7 @@ import org.afrinnov.service.CarService;
 import org.assertj.core.api.Assertions;
 import org.ff4j.FF4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,6 +31,7 @@ class CarsControllerUTest {
     }
 
     @Test
+    @Disabled
     void should_send_dynamic_page_when_ab_testing_false() {
         //Given
         when(getFF4j.check("new_cars_list")).thenReturn(false);
@@ -41,6 +43,7 @@ class CarsControllerUTest {
     }
 
     @Test
+    @Disabled
     void should_send_react_page_when_ab_testing_false() {
         //Given
         when(getFF4j.check("new_cars_list")).thenReturn(true);

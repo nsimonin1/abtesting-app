@@ -5,3 +5,7 @@ Your current application uses SpringMVC + Thymeleaf technologies and you want to
 
 
 
+Abtesting console
+
+http://localhost:8080/ff4j-web-console/home
+
