@@ -1,17 +1,10 @@
 package org.afrinnov.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
 import org.afrinnov.AUrlUtils;
 import org.afrinnov.dto.CarDto;
 import org.afrinnov.request.CarURequest;
 import org.afrinnov.service.CarService;
-import org.ff4j.FF4j;
+import org.afrinnov.tools.FeatureTools;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,41 +14,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.afrinnov.controller.data.RDataConfig.aRDataConfig;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(AUrlUtils.CARS_EDIT)
-public class CarEditController {
-    private final CarService carService;
-    private final FF4j getFF4j;
+public class CarEditController extends AbstractFf4jCarsController {
 
-    public CarEditController(CarService carService, FF4j getFF4) {
-        this.carService = carService;
-        this.getFF4j = getFF4;
+    public CarEditController(CarService carService, FeatureTools featureTools) {
+        super(carService, featureTools);
     }
 
     @GetMapping
     public ModelAndView getRequest(@RequestParam("code") String code) {
-
-        if (getFF4j.check("new_cars_edit")) {
+        if (featureTools.isNewFeatureCarsEditAllow()) {
             Map<String, Object> context = new HashMap<>();
             context.put("code", code);
-            ModelAndView mav = new ModelAndView("page-react");
-            mav.addObject("data", aRDataConfig()
-                    .withApp("WEB")
-                    .withName("Simon")
-                    .withPage("carsEdit")
-                    .withContext(context)
-                    .build());
-            return mav;
+            return reactPage(context);
         }
 
         ModelAndView mav = new ModelAndView("pages/car-edit");
         Optional<CarDto> carDto = carService.oneCar(code);
         if (carDto.isPresent()) {
             mav.addObject("car", carDto.get());
+        } else {
+            mav.addObject("error", "NOT_FOUND");
         }
-        mav.addObject("error", "NOT_FOUND");
         return mav;
     }
 

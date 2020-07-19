@@ -1,17 +1,29 @@
 package org.afrinnov.controller;
 
 import org.afrinnov.service.CarService;
-import org.ff4j.FF4j;
+import org.afrinnov.tools.FeatureTools;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
+
+import static org.afrinnov.controller.data.RDataConfig.aRDataConfig;
 
 public abstract class AbstractFf4jCarsController extends AbstractCarsController {
-    protected final FF4j getFF4j;
+    protected final FeatureTools featureTools;
 
-    public AbstractFf4jCarsController(CarService carService, FF4j getFF4j) {
+    public AbstractFf4jCarsController(CarService carService, FeatureTools featureTools) {
         super(carService);
-        this.getFF4j = getFF4j;
+        this.featureTools = featureTools;
     }
 
-    public boolean checkFeature(String featureName) {
-        return getFF4j.check(featureName);
+    public ModelAndView reactPage(Map<String, Object> context) {
+        ModelAndView mav = new ModelAndView("page-react");
+        mav.addObject("data", aRDataConfig()
+                .withApp("WEB")
+                .withName("Simon")
+                .withContext(context)
+                .build());
+        return mav;
     }
+
 }

@@ -1,7 +1,6 @@
 package org.afrinnov.resource;
 
 import org.afrinnov.dto.CarDto;
-import org.afrinnov.entities.CarEntity;
 import org.afrinnov.exception.AfrinnovException;
 import org.afrinnov.exception.ErrorInfo;
 import org.afrinnov.request.CarRequest;
