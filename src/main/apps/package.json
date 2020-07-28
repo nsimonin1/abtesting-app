@@ -12,7 +12,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "sass-loader": "^8.0.2",
-    "style-loader": "^1.1.4"
+    "style-loader": "^1.1.4",
+    "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
