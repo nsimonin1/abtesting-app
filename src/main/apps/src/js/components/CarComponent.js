@@ -1,89 +1,74 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import CarDataService from "../services/CarDataService";
 
-class CarComponent extends Component {
+const CarComponent = (props) => {
+    const [code, setCode] = useState(window.bdata.context.code)
+    const [car, setCar] = useState({code: null, name: null, serialNumber: null})
+    const [message, setMessage] = useState(null)
+    const [name, setName] = useState('')
+    const [serialNumber, setSerialNumber] = useState('')
+    const [version, setVersion] = useState('') 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            code: window.bdata.context.code,
-            car: {code: null, name: null, serialNumber: null},
-            message: null,
-            name: '',
-            serialNumber: ''
-        };
-        this.getCurrentCar = this.getCurrentCar.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    componentDidMount() {
-        this.getCurrentCar();
-    }
-
-    getCurrentCar() {         
-        const code = this.state.code;
+ const getCurrentCar = () => {     
         CarDataService.retrieveOneCare(code).then(
             response=> {
-                this.setState(
-                    {
-                        car: response.data,
-                        name: response.data.name,
-                        serialNumber: response.data.serialNumber
-                     }
-                    );
+                setCar(response.data)
+                setName(response.data.name)
+                setSerialNumber(response.data.serialNumber)   
+                setVersion(response.data.version)             
             }
         ); 
     }
+    
+    useEffect(() => {
+        getCurrentCar()
+    }, []) 
 
-    handleSubmit(event) {
+   
+
+const handleSubmit = (event) => {
         event.preventDefault();  
         const car = {
-            name: this.state.name,
-            serialNumber: this.state.serialNumber,
-            version: this.state.car.version,
+            name: name,
+            serialNumber: serialNumber,
+            version: version,
         };
-        CarDataService.updateCar(this.state.code, car).then(
+        CarDataService.updateCar(code, car).then(
             response => {  
-                this.getCurrentCar();
+                getCurrentCar();
             }
         );
     }
 
-    handleChange(event) {
-        let name=event.target.name;
-        let value=event.target.value;
-        this.setState({[name]: value});
+    if(car.code == null) {
+        return (<></>)
     }
 
-    render() {
-        if(this.state.car.code == null) {
-            return (<></>);
-        }
-        return (
-            <>  
-                <form onSubmit={this.handleSubmit}>
-                <div className="row">
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label >Code</label>
-                            <input value={this.state.car.code} name="code" onChange={this.handleChange}  disabled type="text" className="form-control" />
-                        </div>
-                        <div className="form-group">
-                            <label >Name</label>
-                            <input value={this.state.name} name="name" onChange={this.handleChange}  type="text" className="form-control" />
-                        </div>
-                        <div className="form-group">
-                            <label >Serial Number</label>
-                            <input value={this.state.serialNumber}  name="serialNumber" onChange={this.handleChange}  type="text" className="form-control" />
-                        </div>
-                        <input type="hidden" value={this.state.car.version} name="version" onChange={this.handleChange}></input>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+    return (
+        <>  
+            <form onSubmit={handleSubmit}>
+            <div className="row">
+                <div className="col-6">
+                    <div className="form-group">
+                        <label >Code</label>
+                        <input value={code} name="code" onChange={e=> setCode(e.target.value)}   disabled type="text" className="form-control" />
                     </div>
+                    <div className="form-group">
+                        <label >Name</label>
+                        <input value={name} name="name" onChange={e=> setName(e.target.value)}  type="text" className="form-control" />
+                    </div>
+                    <div className="form-group">
+                        <label >Serial Number</label>
+                        <input value={serialNumber}  name="serialNumber" onChange={e => setSerialNumber(e.target.value)}  type="text" className="form-control" />
+                    </div>
+                    <input type="hidden" value={version} name="version" onChange={e =>setVersion(e.target.value) }></input>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
-                </form>
-            </>
-        )
-    }
+            </div>
+            </form>
+        </>
+    )
+
 }
 
 export default CarComponent

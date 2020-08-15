@@ -1,61 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import CarDataService from "../services/CarDataService";
 
 
-class CarNewComponent extends Component {
+const CarNewComponent = (props) => {
+    const [name, setName] = useState('')
+    const [serialNumber, setSerialNumber] = useState('')
+    
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            serialNumber: ''
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        
-    }
-
-    handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({[name]: value});
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault(); 
         const car = {
-            name: this.state.name,
-            serialNumber: this.state.serialNumber 
+            name: name,
+            serialNumber: serialNumber 
         };
         CarDataService.createcar(car).then(
             response => {  
                 console.log(response);
+                setName('')
+                setSerialNumber('')
             }
         );
 
     }
 
-    render() {
-        return (
-            <>
-                <form onSubmit={this.handleSubmit}>
-                <div className="row">
-                    <div className="col-6"> 
-                        <div className="form-group">
-                            <label >Name</label>
-                            <input value={this.state.name} name="name" onChange={this.handleChange}  type="text" className="form-control" />
-                        </div>
-                        <div className="form-group">
-                            <label >Serial Number</label>
-                            <input value={this.state.serialNumber}  name="serialNumber" onChange={this.handleChange}  type="text" className="form-control" />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+   
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+            <div className="row">
+                <div className="col-6"> 
+                    <div className="form-group">
+                        <label >Name</label>
+                        <input value={name} name="name" onChange={e => {setName(e.target.value)}}  type="text" className="form-control" />
                     </div>
+                    <div className="form-group">
+                        <label >Serial Number</label>
+                        <input value={serialNumber}  name="serialNumber" onChange={e => {setSerialNumber(e.target.value)}}  type="text" className="form-control" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
-                </form>
-            </>
-        )
-    }
+            </div>
+            </form>
+        </>
+    )
+    
 }
 
 export default CarNewComponent

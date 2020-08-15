@@ -14,7 +14,7 @@ class CarDataService {
     }
 
     updateCar(code, car) {
-        return Axios.patch(`${INSTRUCTOR_API_URL}/cars/${code}`, car);
+        return Axios.post(`${INSTRUCTOR_API_URL}/cars/${code}`, car);
     }
 
     createcar(car) {

@@ -47,7 +47,7 @@ public class CarResource {
     }
 
 
-    @PatchMapping("/{code}")
+    @PostMapping("/{code}")
     public ResponseEntity<CarDto> updateCar(@PathVariable String code,
                                             @RequestBody @Valid CarURequest carRequest) {
         try {
