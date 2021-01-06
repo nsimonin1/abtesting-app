@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "css-loader": "^3.5.2",
     "formik": "^2.1.4",
     "postcss-loader": "^3.0.0",
