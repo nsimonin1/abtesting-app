@@ -22,6 +22,9 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 
+springdoc:
+  pathsToMatch: /api/cars
+
 application:
   abtest:
     ponderation-strategy: true
