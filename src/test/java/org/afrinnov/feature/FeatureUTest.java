@@ -11,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith({SpringExtension.class})
-public class FeatureUTest {
+class FeatureUTest {
 
     @Autowired
     private FF4j getFF4j;

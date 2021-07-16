@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({ConsoleServlet.class, FF4jDispatcherServlet.class})
+@ConditionalOnClass({FF4jDispatcherServlet.class})
 @AutoConfigureAfter(FF4JConfiguration.class)
 @EnableFF4jSwagger
 public class FF4JWebConfiguration extends SpringBootServletInitializer implements WebMvcConfigurer {

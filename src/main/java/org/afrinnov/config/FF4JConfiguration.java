@@ -1,10 +1,7 @@
 package org.afrinnov.config;
 
-import javax.sql.DataSource;
-
 import org.ff4j.FF4j;
 import org.ff4j.audit.repository.JdbcEventRepository;
-import org.ff4j.cache.FF4JCacheManager;
 import org.ff4j.cache.InMemoryCacheManager;
 import org.ff4j.conf.XmlConfig;
 import org.ff4j.core.FeatureStore;
@@ -14,6 +11,8 @@ import org.ff4j.store.JdbcFeatureStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+
+import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
 public class FF4JConfiguration {
