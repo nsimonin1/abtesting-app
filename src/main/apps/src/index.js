@@ -1,26 +1,19 @@
 import React from 'react';
 import ReactDOM  from "react-dom"; 
-import store from "./js/store/index";
-//import './index.scss'; 
+//import './index.scss';
 import NavigationComponent from './js/components/NavigationComponent';
-import { getOneCar} from './js/actions';
-import MainComponent from './js/components/MainComponent';
-import { Provider } from 'react-redux';
+import RouteComponent from './js/components/RouteComponent';
 
 const wrapper = document.getElementById("container");
 
-const mainBlock = <React.StrictMode>
-    <NavigationComponent />
-</React.StrictMode>;
-const reduxMainBlock = <Provider store={store}>
-                            <MainComponent />
-                        </Provider>
-
-window.store = store;
-window.getOneCar = getOneCar; 
-
 wrapper? ReactDOM.render(
-    reduxMainBlock   
-    , 
+    /*<React.StrictMode>
+        <NavigationComponent />
+    </React.StrictMode>*/
+    <React.StrictMode>
+        <RouteComponent />
+    </React.StrictMode>
+    ,
     wrapper): false;
- 
+
+
