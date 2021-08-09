@@ -7,12 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpSession;
 
-import static org.afrinnov.config.AbtestApplicationProperties.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doReturn;
+import javax.servlet.http.HttpSession;
+
+import static org.afrinnov.config.AbtestApplicationProperties.Abtest;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class FeatureToolsTest {
@@ -24,6 +28,8 @@ class FeatureToolsTest {
     private AbtestApplicationProperties applicationProperties;
     @Mock
     private Abtest abtest;
+    @Spy
+    private HttpSession session = new MockHttpSession();
 
     @BeforeEach
     void setUp() {
@@ -31,7 +37,6 @@ class FeatureToolsTest {
     }
 
     @Test
-    //@Disabled
     void shouldReturnTrueWhenCarsEditFeatureIsEnable() {
         //Given
         lenient().when(abtest.isPonderationStrategy()).thenReturn(true);
