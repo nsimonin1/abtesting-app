@@ -1,22 +1,18 @@
 package org.afrinnov.controller;
 
-import java.util.Collections;
-import java.util.Objects;
-
 import org.afrinnov.AUrlUtils;
-import org.afrinnov.controller.data.RDataConfig;
 import org.afrinnov.dto.CarDto;
 import org.afrinnov.request.VersionRequest;
 import org.afrinnov.service.CarService;
 import org.afrinnov.tools.FeatureTools;
-import org.ff4j.FF4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.afrinnov.controller.data.RDataConfig.*;
+import java.util.Collections;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(AUrlUtils.CARS)

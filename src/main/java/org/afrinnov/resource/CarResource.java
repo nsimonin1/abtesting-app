@@ -14,16 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.afrinnov.dto.CarDto.CarDtoBuilder.aCarDto;
-
 @RestController
 @RequestMapping("/api/cars")
-public class CarResource {
-    private final CarService carService;
-
-    public CarResource(CarService carService) {
-        this.carService = carService;
-    }
+public record CarResource(CarService carService) {
 
     @GetMapping
     public ResponseEntity<List<CarDto>> allCars() {
@@ -74,7 +67,7 @@ public class CarResource {
 
     private ResponseEntity<CarDto> errorListed(AfrinnovException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(aCarDto()
+                .body(CarDto.builder()
                         .withErrorMessage(ex.getMessageInfo())
                         .withDetailsErrorMessage(ex.getMessage())
                         .withErrorCode(ex.getStatus())
@@ -83,7 +76,7 @@ public class CarResource {
 
     private ResponseEntity<CarDto> uncategorizedError(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(aCarDto()
+                .body(CarDto.builder()
                         .withErrorMessage(ErrorInfo.TECHNICAL_ISSUE.getMessage())
                         .withDetailsErrorMessage(ex.getMessage())
                         .withErrorCode(ErrorInfo.TECHNICAL_ISSUE.getCode())

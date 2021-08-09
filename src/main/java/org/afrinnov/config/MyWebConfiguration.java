@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.Filter;
+import java.util.Objects;
 
 @Configuration(proxyBeanMethods = false)
 public class MyWebConfiguration {
@@ -18,6 +19,7 @@ public class MyWebConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                Objects.requireNonNull(registry);
                 registry.addMapping("/api/**")
                         .allowedMethods("PUT", "DELETE", "PATCH", "POST", "PUT", "GET");
             }

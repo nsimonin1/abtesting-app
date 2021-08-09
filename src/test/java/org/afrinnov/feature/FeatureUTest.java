@@ -1,12 +1,24 @@
 package org.afrinnov.feature;
 
 import org.ff4j.FF4j;
+import org.ff4j.audit.repository.EventRepository;
+import org.ff4j.audit.repository.InMemoryEventRepository;
+import org.ff4j.conf.XmlConfig;
+import org.ff4j.conf.XmlParser;
+import org.ff4j.core.FeatureStore;
+import org.ff4j.property.store.InMemoryPropertyStore;
+import org.ff4j.property.store.PropertyStore;
+import org.ff4j.store.InMemoryFeatureStore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +27,7 @@ class FeatureUTest {
 
     @Autowired
     private FF4j getFF4j;
+
 
     @Test
     void should_check_all_features_exist() {
@@ -84,9 +97,24 @@ class FeatureUTest {
 
     @TestConfiguration
     static class FakeConfiguration {
+        @Value("db/init-ff4j.xml")
+        private Resource resource;
+
         @Bean
-        public FF4j getFF4j() {
-            return new FF4j("db/init-ff4j.xml");
+        public FF4j getFF4j() throws IOException {
+            XmlConfig configuration = new XmlParser().parseConfigurationFile(resource.getInputStream());
+            FeatureStore featureStore = new InMemoryFeatureStore(configuration);
+            PropertyStore propertyStore = new InMemoryPropertyStore(configuration);
+            EventRepository logsAudit = new InMemoryEventRepository();
+
+            FF4j ff4j = new FF4j();
+            ff4j.setFeatureStore(featureStore);
+            ff4j.setPropertiesStore(propertyStore);
+            ff4j.setEventRepository(logsAudit);
+
+            //ff4j.setEnableAudit(true);
+            ff4j.setAutocreate(true);
+            return ff4j;
         }
     }
 

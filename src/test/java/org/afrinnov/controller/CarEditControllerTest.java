@@ -1,20 +1,20 @@
 package org.afrinnov.controller;
 
+import org.afrinnov.dto.CarDto;
 import org.afrinnov.service.CarService;
 import org.afrinnov.tools.FeatureTools;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
-import static org.afrinnov.dto.CarDto.CarDtoBuilder.aCarDto;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class CarEditControllerTest {
@@ -31,7 +31,7 @@ class CarEditControllerTest {
     void should_send_dynamic_page_when_ab_testing_false() {
         //Given
         String code = "0001";
-        lenient().when(carService.oneCar(code)).thenReturn(Optional.of(aCarDto().build()));
+        lenient().when(carService.oneCar(code)).thenReturn(Optional.of(CarDto.builder().build()));
         // When
         ModelAndView mav = controller.getRequest(code);
         //Then
@@ -58,7 +58,7 @@ class CarEditControllerTest {
         //Given
         String code = "0001";
         lenient().when(featureTools.isNewFeatureCarsEditAllow()).thenReturn(true);
-        lenient().when(carService.oneCar(code)).thenReturn(Optional.of(aCarDto().build()));
+        lenient().when(carService.oneCar(code)).thenReturn(Optional.of(CarDto.builder().build()));
         //When
         ModelAndView mav = controller.getRequest(code);
         //Then

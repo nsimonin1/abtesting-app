@@ -9,7 +9,6 @@ spring:
     console:
       enabled: false
   datasource:
-    platform: mysql
     url: jdbc:mysql://localhost/frontapp?serverTimezone=Africa/Douala&useUnicode=true&characterEncoding=utf8
     username: frontapp
     password: frontapp2020

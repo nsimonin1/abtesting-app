@@ -1,14 +1,5 @@
 package org.afrinnov.service;
 
-import static com.google.common.base.Strings.padStart;
-import static org.afrinnov.builder.CarBuilder.aCarEntity;
-import static org.afrinnov.dto.CarDto.CarDtoBuilder.aCarDto;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.afrinnov.dto.CarDto;
 import org.afrinnov.entities.CarEntity;
 import org.afrinnov.exception.AfrinnovException;
@@ -19,6 +10,14 @@ import org.afrinnov.request.CarURequest;
 import org.afrinnov.request.VersionRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Strings.padStart;
+import static org.afrinnov.builder.CarBuilder.aCarEntity;
 
 @Service
 @Transactional(readOnly = true)
@@ -99,7 +98,7 @@ public class CarService {
     }
 
     private CarDto buildCarDto(CarEntity entity) {
-        return aCarDto()
+        return CarDto.builder()
                 .withCode(entity.getCode())
                 .withName(entity.getName())
                 .withSerialNumber(entity.getSerialNumber())
