@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"; 
 
 import CarDataService from '../services/CarDataService';
-import PagesTools from "../tools/PagesTools";
 
 const ListCarsComponent = (props) =>{
 

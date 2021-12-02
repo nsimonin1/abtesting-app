@@ -1,6 +1,5 @@
 import React from "react";
 import ListCarsComponent from "./ListCarsComponent";
-import PagesTools from "../tools/PagesTools";
 import CarNewComponent from "./CarNewComponent";
 import CarComponent from "./CarComponent";
 import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";

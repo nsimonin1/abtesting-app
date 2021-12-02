@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CarDataService from "../services/CarDataService";
+import carDataService from "../services/CarDataService";
 
 
 const CarNewComponent = (props) => {
@@ -13,7 +13,7 @@ const CarNewComponent = (props) => {
             name: name,
             serialNumber: serialNumber 
         };
-        CarDataService.createcar(car).then(
+        carDataService.createcar(car).then(
             response => {  
                 console.log(response);
                 setName('')
