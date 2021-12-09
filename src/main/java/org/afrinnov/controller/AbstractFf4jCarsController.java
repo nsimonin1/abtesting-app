@@ -11,7 +11,7 @@ import static org.afrinnov.controller.data.RDataConfig.aRDataConfig;
 public abstract class AbstractFf4jCarsController extends AbstractCarsController {
     protected final FeatureTools featureTools;
 
-    public AbstractFf4jCarsController(CarService carService, FeatureTools featureTools) {
+    protected AbstractFf4jCarsController(CarService carService, FeatureTools featureTools) {
         super(carService);
         this.featureTools = featureTools;
     }
