@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react'
 
 import CarDataService from '../../services/CarDataService'
 import ListCars from '.'
+import { LOAD_CARS } from '../../store/action-type'
+import { connect } from 'react-redux'
 
-const ListCarsComponent = (props) => {
+const ListCarsComponent = ({ cars, loadCars}) => {
 
-	const [cars, setCars] = useState([])
 	const [message, setMessage] = useState(null)
     
 	useEffect(() => {
@@ -16,8 +17,8 @@ const ListCarsComponent = (props) => {
 
 	const refreshCourses = () => {
 		CarDataService.retrieveAllCars()
-			.then(response => {  
-				setCars(response.data)
+			.then(response => {   
+				loadCars(response.data)
 			}
 		)
 	}
@@ -29,4 +30,20 @@ const ListCarsComponent = (props) => {
     
 }
 
-export default ListCarsComponent
+const mapStateToProps = state => {	
+	return {
+		cars: state.cars,
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		loadCars: cars => 
+			dispatch({
+			type: LOAD_CARS,
+			cars,
+		})
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCarsComponent)
