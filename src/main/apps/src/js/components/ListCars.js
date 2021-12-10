@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from "react"; 
+import React from 'react'
 
-import CarDataService from '../services/CarDataService';
-
-const ListCarsComponent = (props) =>{
-
-	const [cars, setCars] = useState([])
-	const [message, setMessage] = useState(null)
-    
-	useEffect(() => {
-		refreshCourses()
-	}, [])
-
-
-	const refreshCourses = () => {
-		CarDataService.retrieveAllCars()
-			.then(response => {  
-				setCars(response.data)
-			}
-		)
-	}
-
-    
-	return (  
-		<table className="table">
+const ListCars = ({ cars }) => (
+  <table className="table">
 					<thead>
 							<tr>
 									<th>#</th>
@@ -48,9 +27,7 @@ const ListCarsComponent = (props) =>{
 									) 
 							} 
 					</tbody>
-			</table> 
-	)
-    
-}
+		</table>
+)
 
-export default ListCarsComponent
+export default ListCars

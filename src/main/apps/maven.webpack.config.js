@@ -24,11 +24,7 @@ module.exports = {
           loader: "style-loader!css-loader!postcss-loader!sass-loader"
       }
       ]
-    },
-    output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, '../../../target/static'),
-    },
+    }, 
     plugins: [
       new HtmlWebPackPlugin({
         template: "./src/index.html",
