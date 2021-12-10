@@ -1,6 +1,6 @@
 import React from "react";
-import ListCarsContainer from "./ListCarsContainer";
-import CarNewComponent from "./CarNewComponent";
+import ListCarsContainer from "./cars/ListCarsContainer";
+import CarNewContainer from "./new-car/CarNewContainer";
 import CarComponent from "./CarComponent";
 import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const RouteComponent = () => {
         <Router> 
             <Switch> 
                 <Route exact path='/cars' component={ListCarsContainer}></Route> 
-                <Route path='/cars/new' component={CarNewComponent}></Route> 
+                <Route path='/cars/new' component={CarNewContainer}></Route> 
                 <Route path='/cars/edit' component={CarComponent}></Route> 
             </Switch> 
         </Router> 

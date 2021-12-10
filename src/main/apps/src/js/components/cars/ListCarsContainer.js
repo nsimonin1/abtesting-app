@@ -1,8 +1,8 @@
 import { PropTypes } from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import CarDataService from '../services/CarDataService'
-import ListCars from './ListCars'
+import CarDataService from '../../services/CarDataService'
+import ListCars from '.'
 
 const ListCarsComponent = (props) => {
 

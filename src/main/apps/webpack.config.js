@@ -27,7 +27,7 @@ module.exports = {
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, '../../../target/static'),
+      path: path.resolve(__dirname, '../../../target/classes/static'),
     },
     plugins: [
       new HtmlWebPackPlugin({
