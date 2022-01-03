@@ -30,6 +30,12 @@ const ListCarsComponent = ({ cars, loadCars}) => {
     
 }
 
+ListCarsComponent.propType = {
+	cars: PropTypes.object,
+	loadCars: PropTypes.func,
+
+}
+
 const mapStateToProps = state => {	
 	return {
 		cars: state.cars,
